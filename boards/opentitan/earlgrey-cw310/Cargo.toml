@@ -22,7 +22,7 @@ capsules-extra = { path = "../../../capsules/extra" }
 
 
 [features]
-default = ["fpga_cw310"]
+default = ["fpga_cw310", "want_tickv"]
 
 # OpenTitan SoC design can be synthesized or compiled for different targets. A
 # target can be a specific FPGA board, an ASIC technology, or a simulation tool.
@@ -38,6 +38,7 @@ default = ["fpga_cw310"]
 #      OpenTitan SoC design simulated in Verilator.
 fpga_cw310 = ["earlgrey/config_fpga_cw310"]
 sim_verilator = ["earlgrey/config_sim_verilator"]
+want_tickv = []
 # This is used to indicate that we should include tests that only pass on
 # hardware.
 hardware_tests = []
