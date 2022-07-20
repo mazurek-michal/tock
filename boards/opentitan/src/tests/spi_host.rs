@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // Copyright Tock Contributors 2022.
 
+use crate::setup::PERIPHERALS;
 use crate::tests::run_kernel_op;
-use crate::PERIPHERALS;
 use core::cell::Cell;
 #[allow(unused_imports)]
 use kernel::hil::spi::{ClockPhase, ClockPolarity};

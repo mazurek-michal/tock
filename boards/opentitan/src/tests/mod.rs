@@ -2,10 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // Copyright Tock Contributors 2022.
 
-use crate::BOARD;
-use crate::CHIP;
-use crate::MAIN_CAP;
-use crate::PLATFORM;
+use crate::setup::{BOARD, CHIP, MAIN_CAP, NUM_PROCS, PLATFORM};
 use kernel::debug;
 
 pub fn semihost_command_exit_success() -> ! {
