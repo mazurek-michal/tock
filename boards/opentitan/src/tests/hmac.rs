@@ -1,5 +1,5 @@
+use crate::setup::PERIPHERALS;
 use crate::tests::run_kernel_op;
-use crate::PERIPHERALS;
 use core::cell::Cell;
 use kernel::hil::digest::{self, Digest, DigestData, DigestVerify, HMACSha256};
 use kernel::static_init;
