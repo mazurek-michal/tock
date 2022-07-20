@@ -4,6 +4,7 @@
 
 # Makefile for building the tock kernel for the OpenTitan platform
 
+DEFAULT_BOARD_CONFIGURATION=fpga_cw310
 TARGET=riscv32imc-unknown-none-elf
 PLATFORM=earlgrey-cw310
 FLASHID=--dev-id="0403:6010"
@@ -14,7 +15,7 @@ QEMU ?= ../../../tools/qemu/build/qemu-system-riscv32
 # ORIGIN(rom) + size_manifest = 0x20000000 + 0x400
 QEMU_ENTRY_POINT=0x20000400
 # Latest supported commmit of OpenTitan
-OPENTITAN_SUPPORTED_SHA := 8a3159dbeb743a64c6898e1e8ecac4f18808c00c
+OPENTITAN_SUPPORTED_SHA := 565e4af39760a123c59a184aa2f5812a961fde47
 # Enable virtual function elimination
 VFUNC_ELIM=1
 
