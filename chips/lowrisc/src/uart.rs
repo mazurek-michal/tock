@@ -5,6 +5,7 @@ use kernel::ErrorCode;
 
 use kernel::hil;
 use kernel::hil::uart;
+use kernel::hil::uart::{Parameters, Width, Parity, StopBits};
 use kernel::utilities::cells::OptionalCell;
 use kernel::utilities::cells::TakeCell;
 use kernel::utilities::registers::interfaces::{ReadWriteable, Readable, Writeable};
@@ -49,6 +50,7 @@ impl<'a> Uart<'a> {
 
     fn set_baud_rate(&self, baud_rate: u32) {
         let regs = self.registers;
+        //FIXME Add some info why constant is equal 20
         let uart_ctrl_nco = ((baud_rate as u64) << 20) / self.clock_frequency as u64;
 
         regs.ctrl
@@ -175,17 +177,30 @@ impl<'a> Uart<'a> {
 
 impl hil::uart::Configure for Uart<'_> {
     fn configure(&self, params: hil::uart::Parameters) -> Result<(), ErrorCode> {
-        let regs = self.registers;
-        // We can set the baud rate.
-        self.set_baud_rate(params.baud_rate);
+        match params {
+            Parameters {
+                baud_rate: baud_rate @ 1..=2_000_000,
+                width: Width::Eight,
+                parity: Parity::None,
+                stop_bits: StopBits::One,
+                hw_flow_control: false,
+            } => {
+                let regs = self.registers;
+                // We can set the baud rate.
+                self.set_baud_rate(baud_rate);
 
-        regs.fifo_ctrl
-            .write(FIFO_CTRL::RXRST::SET + FIFO_CTRL::TXRST::SET);
+                regs.fifo_ctrl
+                    .write(FIFO_CTRL::RXRST::SET + FIFO_CTRL::TXRST::SET);
 
-        // Disable all interrupts for now
-        regs.intr_enable.set(0 as u32);
+                // Disable all interrupts for now
+                regs.intr_enable.set(0 as u32);
 
-        Ok(())
+                Ok(())
+            },
+            _ => {
+                Err(ErrorCode::INVAL)
+            }
+        }
     }
 }
 
