@@ -30,14 +30,14 @@ pub unsafe fn main() {
 
     #[cfg(not(test))]
     {
-        let (board_kernel, earlgrey, chip, _peripherals) = setup();
+        let (board_kernel, earlgrey, chip, _peripherals) = setup::setup();
 
         let main_loop_cap = create_capability!(capabilities::MainLoopCapability);
 
         board_kernel.kernel_loop(
-            earlgrey_nexysvideo,
+            earlgrey,
             chip,
-            None::<&kernel::ipc::IPC<NUM_PROCS>>,
+            None::<&kernel::ipc::IPC<0>>,
             &main_loop_cap,
         );
     }
