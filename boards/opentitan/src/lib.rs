@@ -13,7 +13,6 @@
 pub mod io;
 pub mod otbn;
 pub mod setup;
-pub mod usb;
 
 #[cfg(test)]
 pub mod tests;
@@ -23,10 +22,10 @@ pub fn earlgrey_test_runner(tests: &[&dyn Fn()]) {
     use kernel::platform::watchdog::WatchDog;
     use kernel::platform::KernelResources;
     unsafe {
-        let (board_kernel, earlgrey_nexysvideo, _chip, peripherals) = setup::setup();
+        let (board_kernel, earlgrey, _chip, peripherals) = setup::setup();
 
         setup::BOARD = Some(board_kernel);
-        setup::PLATFORM = Some(&earlgrey_nexysvideo);
+        setup::PLATFORM = Some(&earlgrey);
         setup::PERIPHERALS = Some(peripherals);
         setup::MAIN_CAP = Some(&kernel::create_capability!(
             kernel::capabilities::MainLoopCapability
