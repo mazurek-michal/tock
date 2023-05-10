@@ -698,6 +698,8 @@ pub unsafe fn setup() -> (
         static _szero: u8;
         /// The end of the kernel BSS (Included only for kernel PMP)
         static _ezero: u8;
+        /// The start of the OpenTitan manifest
+        static _manifest: u8;
     }
 
     let syscall_filter = static_init!(TbfHeaderFilterDefaultAllow, TbfHeaderFilterDefaultAllow {});
