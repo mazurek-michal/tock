@@ -333,15 +333,18 @@ unsafe fn configure_tickv(
 
 #[cfg(not(feature = "want_tickv"))]
 unsafe fn configure_tickv(
-    _peripherals: &'static EarlGreyDefaultPeripherals<'static>,
-    _board_kernel: &'static kernel::Kernel,
+    peripherals: &'static EarlGreyDefaultPeripherals<'static>,
+    board_kernel: &'static kernel::Kernel,
 ) -> Option<
-    &'static capsules::kv_driver::KVSystemDriver<
+    &'static capsules_extra::kv_driver::KVSystemDriver<
         'static,
-        capsules::tickv::TicKVStore<
+        capsules_extra::tickv::TicKVStore<
             'static,
-            capsules::virtual_flash::FlashUser<'static, lowrisc::flash_ctrl::FlashCtrl<'static>>,
-            capsules::sip_hash::SipHasher24<'static>,
+            capsules_core::virtualizers::virtual_flash::FlashUser<
+                'static,
+                lowrisc::flash_ctrl::FlashCtrl<'static>,
+            >,
+            capsules_extra::sip_hash::SipHasher24<'static>,
         >,
         [u8; 8],
     >,
