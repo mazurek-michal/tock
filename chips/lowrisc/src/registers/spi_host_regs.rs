@@ -3,65 +3,65 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/spi_host/data/spi_host.hjson
 use kernel::utilities::registers::ReadOnly;
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::WriteOnly;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// The number of active-low chip select (cs_n) lines to create.
+/// The number of active-low chip select (cs_n) lines to create.
 pub const SPI_HOST_PARAM_NUM_C_S: u32 = 1;
-// The size of the Tx FIFO (in words)
+/// The size of the Tx FIFO (in words)
 pub const SPI_HOST_PARAM_TX_DEPTH: u32 = 72;
-// The size of the Rx FIFO (in words)
+/// The size of the Rx FIFO (in words)
 pub const SPI_HOST_PARAM_RX_DEPTH: u32 = 64;
-// The size of the Cmd FIFO (one segment descriptor per entry)
+/// The size of the Cmd FIFO (one segment descriptor per entry)
 pub const SPI_HOST_PARAM_CMD_DEPTH: u32 = 4;
-// Number of alerts
+/// Number of alerts
 pub const SPI_HOST_PARAM_NUM_ALERTS: u32 = 1;
-// Register width
+/// Register width
 pub const SPI_HOST_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub SpiHostRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Control register
+        /// Control register
         (0x0010 => pub(crate) control: ReadWrite<u32, CONTROL::Register>),
-        // Status register
+        /// Status register
         (0x0014 => pub(crate) status: ReadWrite<u32, STATUS::Register>),
-        // Configuration options register.
-        (0x0018 => pub(crate) configop: [ReadWrite<u32, CONFIGOP::Register>; 1]),
-        // Chip-Select ID
+        /// Configuration options register.
+        (0x0018 => pub(crate) configopts: [ReadWrite<u32, CONFIGOPTS::Register>; 1]),
+        /// Chip-Select ID
         (0x001c => pub(crate) csid: ReadWrite<u32, CSID::Register>),
-        // Command Register
+        /// Command Register
         (0x0020 => pub(crate) command: ReadWrite<u32, COMMAND::Register>),
-        // Memory area: SPI Receive Data.
+        /// Memory area: SPI Receive Data.
         (0x0024 => pub(crate) rxdata: [ReadOnly<u32>; 1]),
-        // Memory area: SPI Transmit Data.
+        /// Memory area: SPI Transmit Data.
         (0x0028 => pub(crate) txdata: [WriteOnly<u32>; 1]),
-        // Controls which classes of errors raise an interrupt.
+        /// Controls which classes of errors raise an interrupt.
         (0x002c => pub(crate) error_enable: ReadWrite<u32, ERROR_ENABLE::Register>),
-        // Indicates that any errors that have occurred.
+        /// Indicates that any errors that have occurred.
         (0x0030 => pub(crate) error_status: ReadWrite<u32, ERROR_STATUS::Register>),
-        // Controls which classes of SPI events raise an interrupt.
+        /// Controls which classes of SPI events raise an interrupt.
         (0x0034 => pub(crate) event_enable: ReadWrite<u32, EVENT_ENABLE::Register>),
         (0x0038 => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         ERROR OFFSET(0) NUMBITS(1) [],
         SPI_EVENT OFFSET(1) NUMBITS(1) [],
@@ -92,7 +92,7 @@ register_bitfields![u32,
         ACTIVE OFFSET(30) NUMBITS(1) [],
         READY OFFSET(31) NUMBITS(1) [],
     ],
-    pub(crate) CONFIGOP [
+    pub(crate) CONFIGOPTS [
         CLKDIV_0 OFFSET(0) NUMBITS(16) [],
         CSNIDLE_0 OFFSET(16) NUMBITS(4) [],
         CSNTRAIL_0 OFFSET(20) NUMBITS(4) [],

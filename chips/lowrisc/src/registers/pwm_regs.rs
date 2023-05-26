@@ -3,38 +3,38 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/pwm/data/pwm.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of PWM outputs
+/// Number of PWM outputs
 pub const PWM_PARAM_N_OUTPUTS: u32 = 6;
-// Number of alerts
+/// Number of alerts
 pub const PWM_PARAM_NUM_ALERTS: u32 = 1;
-// Register width
+/// Register width
 pub const PWM_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub PwmRegisters {
-        // Alert Test Register
+        /// Alert Test Register
         (0x0000 => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Register write enable for all control registers
+        /// Register write enable for all control registers
         (0x0004 => pub(crate) regwen: ReadWrite<u32, REGWEN::Register>),
-        // Configuration register
+        /// Configuration register
         (0x0008 => pub(crate) cfg: ReadWrite<u32, CFG::Register>),
-        // Enable PWM operation for each channel
-        (0x000c => pub(crate) pwm_: [ReadWrite<u32, PWM_::Register>; 1]),
-        // Invert the PWM output for each channel
-        (0x0010 => pub(crate) inve: [ReadWrite<u32, INVE::Register>; 1]),
-        // Basic PWM Channel Parameters
+        /// Enable PWM operation for each channel
+        (0x000c => pub(crate) pwm_en: [ReadWrite<u32, PWM_EN::Register>; 1]),
+        /// Invert the PWM output for each channel
+        (0x0010 => pub(crate) invert: [ReadWrite<u32, INVERT::Register>; 1]),
+        /// Basic PWM Channel Parameters
         (0x0014 => pub(crate) pwm_param: [ReadWrite<u32, PWM_PARAM::Register>; 6]),
-        // Controls the duty_cycle of each channel.
+        /// Controls the duty_cycle of each channel.
         (0x002c => pub(crate) duty_cycle: [ReadWrite<u32, DUTY_CYCLE::Register>; 6]),
-        // Hardware controlled blink/heartbeat parameters.
+        /// Hardware controlled blink/heartbeat parameters.
         (0x0044 => pub(crate) blink_param: [ReadWrite<u32, BLINK_PARAM::Register>; 6]),
         (0x005c => @END),
     }
@@ -52,7 +52,7 @@ register_bitfields![u32,
         DC_RESN OFFSET(27) NUMBITS(4) [],
         CNTR_EN OFFSET(31) NUMBITS(1) [],
     ],
-    pub(crate) PWM_ [
+    pub(crate) PWM_EN [
         EN_0 OFFSET(0) NUMBITS(1) [],
         EN_1 OFFSET(1) NUMBITS(1) [],
         EN_2 OFFSET(2) NUMBITS(1) [],
@@ -60,7 +60,7 @@ register_bitfields![u32,
         EN_4 OFFSET(4) NUMBITS(1) [],
         EN_5 OFFSET(5) NUMBITS(1) [],
     ],
-    pub(crate) INVE [
+    pub(crate) INVERT [
         INVERT_0 OFFSET(0) NUMBITS(1) [],
         INVERT_1 OFFSET(1) NUMBITS(1) [],
         INVERT_2 OFFSET(2) NUMBITS(1) [],

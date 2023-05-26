@@ -3,61 +3,61 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/edn/data/edn.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of alerts
+/// Number of alerts
 pub const EDN_PARAM_NUM_ALERTS: u32 = 2;
-// Register width
+/// Register width
 pub const EDN_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub EdnRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Register write enable for all control registers
+        /// Register write enable for all control registers
         (0x0010 => pub(crate) regwen: ReadWrite<u32, REGWEN::Register>),
-        // EDN control register
+        /// EDN control register
         (0x0014 => pub(crate) ctrl: ReadWrite<u32, CTRL::Register>),
-        // EDN boot instantiate command register
+        /// EDN boot instantiate command register
         (0x0018 => pub(crate) boot_ins_cmd: ReadWrite<u32, BOOT_INS_CMD::Register>),
-        // EDN boot generate command register
+        /// EDN boot generate command register
         (0x001c => pub(crate) boot_gen_cmd: ReadWrite<u32, BOOT_GEN_CMD::Register>),
-        // EDN csrng app command request register
+        /// EDN csrng app command request register
         (0x0020 => pub(crate) sw_cmd_req: ReadWrite<u32, SW_CMD_REQ::Register>),
-        // EDN command status register
+        /// EDN command status register
         (0x0024 => pub(crate) sw_cmd_sts: ReadWrite<u32, SW_CMD_STS::Register>),
-        // EDN csrng reseed command register
+        /// EDN csrng reseed command register
         (0x0028 => pub(crate) reseed_cmd: ReadWrite<u32, RESEED_CMD::Register>),
-        // EDN csrng generate command register
+        /// EDN csrng generate command register
         (0x002c => pub(crate) generate_cmd: ReadWrite<u32, GENERATE_CMD::Register>),
-        // EDN maximum number of requests between reseeds register
+        /// EDN maximum number of requests between reseeds register
         (0x0030 => pub(crate) max_num_reqs_between_reseeds: ReadWrite<u32, MAX_NUM_REQS_BETWEEN_RESEEDS::Register>),
-        // Recoverable alert status register
+        /// Recoverable alert status register
         (0x0034 => pub(crate) recov_alert_sts: ReadWrite<u32, RECOV_ALERT_STS::Register>),
-        // Hardware detection of error conditions status register
+        /// Hardware detection of fatal error conditions status register
         (0x0038 => pub(crate) err_code: ReadWrite<u32, ERR_CODE::Register>),
-        // Test error conditions register
+        /// Test error conditions register
         (0x003c => pub(crate) err_code_test: ReadWrite<u32, ERR_CODE_TEST::Register>),
-        // Main state machine state debug register
+        /// Main state machine state observation register
         (0x0040 => pub(crate) main_sm_state: ReadWrite<u32, MAIN_SM_STATE::Register>),
         (0x0044 => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         EDN_CMD_REQ_DONE OFFSET(0) NUMBITS(1) [],
         EDN_FATAL_ERR OFFSET(1) NUMBITS(1) [],
@@ -107,6 +107,7 @@ register_bitfields![u32,
     pub(crate) ERR_CODE [
         SFIFO_RESCMD_ERR OFFSET(0) NUMBITS(1) [],
         SFIFO_GENCMD_ERR OFFSET(1) NUMBITS(1) [],
+        SFIFO_OUTPUT_ERR OFFSET(2) NUMBITS(1) [],
         EDN_ACK_SM_ERR OFFSET(20) NUMBITS(1) [],
         EDN_MAIN_SM_ERR OFFSET(21) NUMBITS(1) [],
         EDN_CNTR_ERR OFFSET(22) NUMBITS(1) [],

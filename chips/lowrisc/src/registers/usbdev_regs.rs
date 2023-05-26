@@ -3,81 +3,82 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/usbdev/data/usbdev.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of endpoints
+/// Number of endpoints
 pub const USBDEV_PARAM_N_ENDPOINTS: u32 = 12;
-// Number of alerts
+/// Number of alerts
 pub const USBDEV_PARAM_NUM_ALERTS: u32 = 1;
-// Register width
+/// Register width
 pub const USBDEV_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub UsbdevRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // USB Control
+        /// USB Control
         (0x0010 => pub(crate) usbctrl: ReadWrite<u32, USBCTRL::Register>),
-        // Enable an endpoint to respond to transactions in the downstream direction.
-        (0x0014 => pub(crate) ep_out_enab: [ReadWrite<u32, EP_OUT_ENAB::Register>; 1]),
-        // Enable an endpoint to respond to transactions in the upstream direction.
-        (0x0018 => pub(crate) ep_in_enab: [ReadWrite<u32, EP_IN_ENAB::Register>; 1]),
-        // USB Status
+        /// Enable an endpoint to respond to transactions in the downstream direction.
+        (0x0014 => pub(crate) ep_out_enable: [ReadWrite<u32, EP_OUT_ENABLE::Register>; 1]),
+        /// Enable an endpoint to respond to transactions in the upstream direction.
+        (0x0018 => pub(crate) ep_in_enable: [ReadWrite<u32, EP_IN_ENABLE::Register>; 1]),
+        /// USB Status
         (0x001c => pub(crate) usbstat: ReadWrite<u32, USBSTAT::Register>),
-        // Available Buffer FIFO
+        /// Available Buffer FIFO
         (0x0020 => pub(crate) avbuffer: ReadWrite<u32, AVBUFFER::Register>),
-        // Received Buffer FIFO
+        /// Received Buffer FIFO
         (0x0024 => pub(crate) rxfifo: ReadWrite<u32, RXFIFO::Register>),
-        // Receive SETUP transaction enable
-        (0x0028 => pub(crate) rxenable_set: [ReadWrite<u32, RXENABLE_SET::Register>; 1]),
-        // Receive OUT transaction enable
-        (0x002c => pub(crate) rxenable_o: [ReadWrite<u32, RXENABLE_O::Register>; 1]),
-        // Set NAK after OUT transactions
-        (0x0030 => pub(crate) set_nak_o: [ReadWrite<u32, SET_NAK_O::Register>; 1]),
-        // IN Transaction Sent
-        (0x0034 => pub(crate) in_se: [ReadWrite<u32, IN_SE::Register>; 1]),
-        // OUT Endpoint STALL control
-        (0x0038 => pub(crate) out_sta: [ReadWrite<u32, OUT_STA::Register>; 1]),
-        // IN Endpoint STALL control
-        (0x003c => pub(crate) in_sta: [ReadWrite<u32, IN_STA::Register>; 1]),
-        // Configure IN Transaction
+        /// Receive SETUP transaction enable
+        (0x0028 => pub(crate) rxenable_setup: [ReadWrite<u32, RXENABLE_SETUP::Register>; 1]),
+        /// Receive OUT transaction enable
+        (0x002c => pub(crate) rxenable_out: [ReadWrite<u32, RXENABLE_OUT::Register>; 1]),
+        /// Set NAK after OUT transactions
+        (0x0030 => pub(crate) set_nak_out: [ReadWrite<u32, SET_NAK_OUT::Register>; 1]),
+        /// IN Transaction Sent
+        (0x0034 => pub(crate) in_sent: [ReadWrite<u32, IN_SENT::Register>; 1]),
+        /// OUT Endpoint STALL control
+        (0x0038 => pub(crate) out_stall: [ReadWrite<u32, OUT_STALL::Register>; 1]),
+        /// IN Endpoint STALL control
+        (0x003c => pub(crate) in_stall: [ReadWrite<u32, IN_STALL::Register>; 1]),
+        /// Configure IN Transaction
         (0x0040 => pub(crate) configin: [ReadWrite<u32, CONFIGIN::Register>; 12]),
-        // OUT Endpoint isochronous setting
-        (0x0070 => pub(crate) out_i: [ReadWrite<u32, OUT_I::Register>; 1]),
-        // IN Endpoint isochronous setting
-        (0x0074 => pub(crate) in_i: [ReadWrite<u32, IN_I::Register>; 1]),
-        // Clear the data toggle flag
-        (0x0078 => pub(crate) data_toggle_cle: [ReadWrite<u32, DATA_TOGGLE_CLE::Register>; 1]),
-        // USB PHY pins sense.
+        /// OUT Endpoint isochronous setting
+        (0x0070 => pub(crate) out_iso: [ReadWrite<u32, OUT_ISO::Register>; 1]),
+        /// IN Endpoint isochronous setting
+        (0x0074 => pub(crate) in_iso: [ReadWrite<u32, IN_ISO::Register>; 1]),
+        /// Clear the data toggle flag
+        (0x0078 => pub(crate) data_toggle_clear: [ReadWrite<u32, DATA_TOGGLE_CLEAR::Register>; 1]),
+        /// USB PHY pins sense.
         (0x007c => pub(crate) phy_pins_sense: ReadWrite<u32, PHY_PINS_SENSE::Register>),
-        // USB PHY pins drive.
+        /// USB PHY pins drive.
         (0x0080 => pub(crate) phy_pins_drive: ReadWrite<u32, PHY_PINS_DRIVE::Register>),
-        // USB PHY Configuration
+        /// USB PHY Configuration
         (0x0084 => pub(crate) phy_config: ReadWrite<u32, PHY_CONFIG::Register>),
-        // USB wake module control for suspend / resume
+        /// USB wake module control for suspend / resume
         (0x0088 => pub(crate) wake_control: ReadWrite<u32, WAKE_CONTROL::Register>),
-        // USB wake module events and debug
+        /// USB wake module events and debug
         (0x008c => pub(crate) wake_events: ReadWrite<u32, WAKE_EVENTS::Register>),
-        // Memory area: 2 kB packet buffer. Divided into 32 64-byte buffers.
+        (0x0090 => _reserved1),
+        /// Memory area: 2 kB packet buffer. Divided into 32 64-byte buffers.
         (0x0800 => pub(crate) buffer: [ReadWrite<u32>; 512]),
         (0x1000 => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         PKT_RECEIVED OFFSET(0) NUMBITS(1) [],
         PKT_SENT OFFSET(1) NUMBITS(1) [],
@@ -105,7 +106,7 @@ register_bitfields![u32,
         RESUME_LINK_ACTIVE OFFSET(1) NUMBITS(1) [],
         DEVICE_ADDRESS OFFSET(16) NUMBITS(7) [],
     ],
-    pub(crate) EP_OUT_ENAB [
+    pub(crate) EP_OUT_ENABLE [
         ENABLE_0 OFFSET(0) NUMBITS(1) [],
         ENABLE_1 OFFSET(1) NUMBITS(1) [],
         ENABLE_2 OFFSET(2) NUMBITS(1) [],
@@ -119,7 +120,7 @@ register_bitfields![u32,
         ENABLE_10 OFFSET(10) NUMBITS(1) [],
         ENABLE_11 OFFSET(11) NUMBITS(1) [],
     ],
-    pub(crate) EP_IN_ENAB [
+    pub(crate) EP_IN_ENABLE [
         ENABLE_0 OFFSET(0) NUMBITS(1) [],
         ENABLE_1 OFFSET(1) NUMBITS(1) [],
         ENABLE_2 OFFSET(2) NUMBITS(1) [],
@@ -146,9 +147,9 @@ register_bitfields![u32,
             RESUMING = 6,
         ],
         SENSE OFFSET(15) NUMBITS(1) [],
-        AV_DEPTH OFFSET(16) NUMBITS(3) [],
+        AV_DEPTH OFFSET(16) NUMBITS(4) [],
         AV_FULL OFFSET(23) NUMBITS(1) [],
-        RX_DEPTH OFFSET(24) NUMBITS(3) [],
+        RX_DEPTH OFFSET(24) NUMBITS(4) [],
         RX_EMPTY OFFSET(31) NUMBITS(1) [],
     ],
     pub(crate) AVBUFFER [
@@ -160,7 +161,7 @@ register_bitfields![u32,
         SETUP OFFSET(19) NUMBITS(1) [],
         EP OFFSET(20) NUMBITS(4) [],
     ],
-    pub(crate) RXENABLE_SET [
+    pub(crate) RXENABLE_SETUP [
         SETUP_0 OFFSET(0) NUMBITS(1) [],
         SETUP_1 OFFSET(1) NUMBITS(1) [],
         SETUP_2 OFFSET(2) NUMBITS(1) [],
@@ -174,7 +175,7 @@ register_bitfields![u32,
         SETUP_10 OFFSET(10) NUMBITS(1) [],
         SETUP_11 OFFSET(11) NUMBITS(1) [],
     ],
-    pub(crate) RXENABLE_O [
+    pub(crate) RXENABLE_OUT [
         OUT_0 OFFSET(0) NUMBITS(1) [],
         OUT_1 OFFSET(1) NUMBITS(1) [],
         OUT_2 OFFSET(2) NUMBITS(1) [],
@@ -188,7 +189,7 @@ register_bitfields![u32,
         OUT_10 OFFSET(10) NUMBITS(1) [],
         OUT_11 OFFSET(11) NUMBITS(1) [],
     ],
-    pub(crate) SET_NAK_O [
+    pub(crate) SET_NAK_OUT [
         ENABLE_0 OFFSET(0) NUMBITS(1) [],
         ENABLE_1 OFFSET(1) NUMBITS(1) [],
         ENABLE_2 OFFSET(2) NUMBITS(1) [],
@@ -202,7 +203,7 @@ register_bitfields![u32,
         ENABLE_10 OFFSET(10) NUMBITS(1) [],
         ENABLE_11 OFFSET(11) NUMBITS(1) [],
     ],
-    pub(crate) IN_SE [
+    pub(crate) IN_SENT [
         SENT_0 OFFSET(0) NUMBITS(1) [],
         SENT_1 OFFSET(1) NUMBITS(1) [],
         SENT_2 OFFSET(2) NUMBITS(1) [],
@@ -216,7 +217,7 @@ register_bitfields![u32,
         SENT_10 OFFSET(10) NUMBITS(1) [],
         SENT_11 OFFSET(11) NUMBITS(1) [],
     ],
-    pub(crate) OUT_STA [
+    pub(crate) OUT_STALL [
         ENDPOINT_0 OFFSET(0) NUMBITS(1) [],
         ENDPOINT_1 OFFSET(1) NUMBITS(1) [],
         ENDPOINT_2 OFFSET(2) NUMBITS(1) [],
@@ -230,7 +231,7 @@ register_bitfields![u32,
         ENDPOINT_10 OFFSET(10) NUMBITS(1) [],
         ENDPOINT_11 OFFSET(11) NUMBITS(1) [],
     ],
-    pub(crate) IN_STA [
+    pub(crate) IN_STALL [
         ENDPOINT_0 OFFSET(0) NUMBITS(1) [],
         ENDPOINT_1 OFFSET(1) NUMBITS(1) [],
         ENDPOINT_2 OFFSET(2) NUMBITS(1) [],
@@ -250,7 +251,7 @@ register_bitfields![u32,
         PEND_0 OFFSET(30) NUMBITS(1) [],
         RDY_0 OFFSET(31) NUMBITS(1) [],
     ],
-    pub(crate) OUT_I [
+    pub(crate) OUT_ISO [
         ISO_0 OFFSET(0) NUMBITS(1) [],
         ISO_1 OFFSET(1) NUMBITS(1) [],
         ISO_2 OFFSET(2) NUMBITS(1) [],
@@ -264,7 +265,7 @@ register_bitfields![u32,
         ISO_10 OFFSET(10) NUMBITS(1) [],
         ISO_11 OFFSET(11) NUMBITS(1) [],
     ],
-    pub(crate) IN_I [
+    pub(crate) IN_ISO [
         ISO_0 OFFSET(0) NUMBITS(1) [],
         ISO_1 OFFSET(1) NUMBITS(1) [],
         ISO_2 OFFSET(2) NUMBITS(1) [],
@@ -278,7 +279,7 @@ register_bitfields![u32,
         ISO_10 OFFSET(10) NUMBITS(1) [],
         ISO_11 OFFSET(11) NUMBITS(1) [],
     ],
-    pub(crate) DATA_TOGGLE_CLE [
+    pub(crate) DATA_TOGGLE_CLEAR [
         CLEAR_0 OFFSET(0) NUMBITS(1) [],
         CLEAR_1 OFFSET(1) NUMBITS(1) [],
         CLEAR_2 OFFSET(2) NUMBITS(1) [],

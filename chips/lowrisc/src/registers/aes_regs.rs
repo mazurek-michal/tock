@@ -3,48 +3,48 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/aes/data/aes.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number registers for key
+/// Number registers for key
 pub const AES_PARAM_NUM_REGS_KEY: u32 = 8;
-// Number registers for initialization vector
+/// Number registers for initialization vector
 pub const AES_PARAM_NUM_REGS_IV: u32 = 4;
-// Number registers for input and output data
+/// Number registers for input and output data
 pub const AES_PARAM_NUM_REGS_DATA: u32 = 4;
-// Number of alerts
+/// Number of alerts
 pub const AES_PARAM_NUM_ALERTS: u32 = 2;
-// Register width
+/// Register width
 pub const AES_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub AesRegisters {
-        // Alert Test Register
+        /// Alert Test Register
         (0x0000 => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Initial Key Registers Share 0.
+        /// Initial Key Registers Share 0.
         (0x0004 => pub(crate) key_share0: [ReadWrite<u32, KEY_SHARE0::Register>; 8]),
-        // Initial Key Registers Share 1.
+        /// Initial Key Registers Share 1.
         (0x0024 => pub(crate) key_share1: [ReadWrite<u32, KEY_SHARE1::Register>; 8]),
-        // Initialization Vector Registers.
+        /// Initialization Vector Registers.
         (0x0044 => pub(crate) iv: [ReadWrite<u32, IV::Register>; 4]),
-        // Input Data Registers.
+        /// Input Data Registers.
         (0x0054 => pub(crate) data_in: [ReadWrite<u32, DATA_IN::Register>; 4]),
-        // Output Data Register.
+        /// Output Data Register.
         (0x0064 => pub(crate) data_out: [ReadWrite<u32, DATA_OUT::Register>; 4]),
-        // Control Register.
+        /// Control Register.
         (0x0074 => pub(crate) ctrl_shadowed: ReadWrite<u32, CTRL_SHADOWED::Register>),
-        // Auxiliary Control Register.
+        /// Auxiliary Control Register.
         (0x0078 => pub(crate) ctrl_aux_shadowed: ReadWrite<u32, CTRL_AUX_SHADOWED::Register>),
-        // Lock bit for Auxiliary Control Register.
+        /// Lock bit for Auxiliary Control Register.
         (0x007c => pub(crate) ctrl_aux_regwen: ReadWrite<u32, CTRL_AUX_REGWEN::Register>),
-        // Trigger Register.
+        /// Trigger Register.
         (0x0080 => pub(crate) trigger: ReadWrite<u32, TRIGGER::Register>),
-        // Status Register
+        /// Status Register
         (0x0084 => pub(crate) status: ReadWrite<u32, STATUS::Register>),
         (0x0088 => @END),
     }
@@ -95,10 +95,10 @@ register_bitfields![u32,
             PER_8K = 4,
         ],
         MANUAL_OPERATION OFFSET(15) NUMBITS(1) [],
-        FORCE_ZERO_MASKS OFFSET(16) NUMBITS(1) [],
     ],
     pub(crate) CTRL_AUX_SHADOWED [
         KEY_TOUCH_FORCES_RESEED OFFSET(0) NUMBITS(1) [],
+        FORCE_MASKS OFFSET(1) NUMBITS(1) [],
     ],
     pub(crate) CTRL_AUX_REGWEN [
         CTRL_AUX_REGWEN OFFSET(0) NUMBITS(1) [],

@@ -3,141 +3,141 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/entropy_src/data/entropy_src.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of alerts
+/// Number of alerts
 pub const ENTROPY_SRC_PARAM_NUM_ALERTS: u32 = 2;
-// Register width
+/// Register width
 pub const ENTROPY_SRC_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub EntropySrcRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Register write enable for module enable register
+        /// Register write enable for module enable register
         (0x0010 => pub(crate) me_regwen: ReadWrite<u32, ME_REGWEN::Register>),
-        // Register write enable for control and threshold registers
+        /// Register write enable for control and threshold registers
         (0x0014 => pub(crate) sw_regupd: ReadWrite<u32, SW_REGUPD::Register>),
-        // Register write enable for all control registers
+        /// Register write enable for all control registers
         (0x0018 => pub(crate) regwen: ReadWrite<u32, REGWEN::Register>),
-        // Revision register
+        /// Revision register
         (0x001c => pub(crate) rev: ReadWrite<u32, REV::Register>),
-        // Module enable register
+        /// Module enable register
         (0x0020 => pub(crate) module_enable: ReadWrite<u32, MODULE_ENABLE::Register>),
-        // Configuration register
+        /// Configuration register
         (0x0024 => pub(crate) conf: ReadWrite<u32, CONF::Register>),
-        // Entropy control register
+        /// Entropy control register
         (0x0028 => pub(crate) entropy_control: ReadWrite<u32, ENTROPY_CONTROL::Register>),
-        // Entropy data bits
+        /// Entropy data bits
         (0x002c => pub(crate) entropy_data: ReadWrite<u32, ENTROPY_DATA::Register>),
-        // Health test windows register
+        /// Health test windows register
         (0x0030 => pub(crate) health_test_windows: ReadWrite<u32, HEALTH_TEST_WINDOWS::Register>),
-        // Repetition count test thresholds register
+        /// Repetition count test thresholds register
         (0x0034 => pub(crate) repcnt_thresholds: ReadWrite<u32, REPCNT_THRESHOLDS::Register>),
-        // Repetition count symbol test thresholds register
+        /// Repetition count symbol test thresholds register
         (0x0038 => pub(crate) repcnts_thresholds: ReadWrite<u32, REPCNTS_THRESHOLDS::Register>),
-        // Adaptive proportion test high thresholds register
+        /// Adaptive proportion test high thresholds register
         (0x003c => pub(crate) adaptp_hi_thresholds: ReadWrite<u32, ADAPTP_HI_THRESHOLDS::Register>),
-        // Adaptive proportion test low thresholds register
+        /// Adaptive proportion test low thresholds register
         (0x0040 => pub(crate) adaptp_lo_thresholds: ReadWrite<u32, ADAPTP_LO_THRESHOLDS::Register>),
-        // Bucket test thresholds register
+        /// Bucket test thresholds register
         (0x0044 => pub(crate) bucket_thresholds: ReadWrite<u32, BUCKET_THRESHOLDS::Register>),
-        // Markov test high thresholds register
+        /// Markov test high thresholds register
         (0x0048 => pub(crate) markov_hi_thresholds: ReadWrite<u32, MARKOV_HI_THRESHOLDS::Register>),
-        // Markov test low thresholds register
+        /// Markov test low thresholds register
         (0x004c => pub(crate) markov_lo_thresholds: ReadWrite<u32, MARKOV_LO_THRESHOLDS::Register>),
-        // External health test high thresholds register
+        /// External health test high thresholds register
         (0x0050 => pub(crate) extht_hi_thresholds: ReadWrite<u32, EXTHT_HI_THRESHOLDS::Register>),
-        // External health test low thresholds register
+        /// External health test low thresholds register
         (0x0054 => pub(crate) extht_lo_thresholds: ReadWrite<u32, EXTHT_LO_THRESHOLDS::Register>),
-        // Repetition count test high watermarks register
+        /// Repetition count test high watermarks register
         (0x0058 => pub(crate) repcnt_hi_watermarks: ReadWrite<u32, REPCNT_HI_WATERMARKS::Register>),
-        // Repetition count symbol test high watermarks register
+        /// Repetition count symbol test high watermarks register
         (0x005c => pub(crate) repcnts_hi_watermarks: ReadWrite<u32, REPCNTS_HI_WATERMARKS::Register>),
-        // Adaptive proportion test high watermarks register
+        /// Adaptive proportion test high watermarks register
         (0x0060 => pub(crate) adaptp_hi_watermarks: ReadWrite<u32, ADAPTP_HI_WATERMARKS::Register>),
-        // Adaptive proportion test low watermarks register
+        /// Adaptive proportion test low watermarks register
         (0x0064 => pub(crate) adaptp_lo_watermarks: ReadWrite<u32, ADAPTP_LO_WATERMARKS::Register>),
-        // External health test high watermarks register
+        /// External health test high watermarks register
         (0x0068 => pub(crate) extht_hi_watermarks: ReadWrite<u32, EXTHT_HI_WATERMARKS::Register>),
-        // External health test low watermarks register
+        /// External health test low watermarks register
         (0x006c => pub(crate) extht_lo_watermarks: ReadWrite<u32, EXTHT_LO_WATERMARKS::Register>),
-        // Bucket test high watermarks register
+        /// Bucket test high watermarks register
         (0x0070 => pub(crate) bucket_hi_watermarks: ReadWrite<u32, BUCKET_HI_WATERMARKS::Register>),
-        // Markov test high watermarks register
+        /// Markov test high watermarks register
         (0x0074 => pub(crate) markov_hi_watermarks: ReadWrite<u32, MARKOV_HI_WATERMARKS::Register>),
-        // Markov test low watermarks register
+        /// Markov test low watermarks register
         (0x0078 => pub(crate) markov_lo_watermarks: ReadWrite<u32, MARKOV_LO_WATERMARKS::Register>),
-        // Repetition count test failure counter register
+        /// Repetition count test failure counter register
         (0x007c => pub(crate) repcnt_total_fails: ReadWrite<u32, REPCNT_TOTAL_FAILS::Register>),
-        // Repetition count symbol test failure counter register
+        /// Repetition count symbol test failure counter register
         (0x0080 => pub(crate) repcnts_total_fails: ReadWrite<u32, REPCNTS_TOTAL_FAILS::Register>),
-        // Adaptive proportion high test failure counter register
+        /// Adaptive proportion high test failure counter register
         (0x0084 => pub(crate) adaptp_hi_total_fails: ReadWrite<u32, ADAPTP_HI_TOTAL_FAILS::Register>),
-        // Adaptive proportion low test failure counter register
+        /// Adaptive proportion low test failure counter register
         (0x0088 => pub(crate) adaptp_lo_total_fails: ReadWrite<u32, ADAPTP_LO_TOTAL_FAILS::Register>),
-        // Bucket test failure counter register
+        /// Bucket test failure counter register
         (0x008c => pub(crate) bucket_total_fails: ReadWrite<u32, BUCKET_TOTAL_FAILS::Register>),
-        // Markov high test failure counter register
+        /// Markov high test failure counter register
         (0x0090 => pub(crate) markov_hi_total_fails: ReadWrite<u32, MARKOV_HI_TOTAL_FAILS::Register>),
-        // Markov low test failure counter register
+        /// Markov low test failure counter register
         (0x0094 => pub(crate) markov_lo_total_fails: ReadWrite<u32, MARKOV_LO_TOTAL_FAILS::Register>),
-        // External health test high threshold failure counter register
+        /// External health test high threshold failure counter register
         (0x0098 => pub(crate) extht_hi_total_fails: ReadWrite<u32, EXTHT_HI_TOTAL_FAILS::Register>),
-        // External health test low threshold failure counter register
+        /// External health test low threshold failure counter register
         (0x009c => pub(crate) extht_lo_total_fails: ReadWrite<u32, EXTHT_LO_TOTAL_FAILS::Register>),
-        // Alert threshold register
+        /// Alert threshold register
         (0x00a0 => pub(crate) alert_threshold: ReadWrite<u32, ALERT_THRESHOLD::Register>),
-        // Alert summary failure counts register
+        /// Alert summary failure counts register
         (0x00a4 => pub(crate) alert_summary_fail_counts: ReadWrite<u32, ALERT_SUMMARY_FAIL_COUNTS::Register>),
-        // Alert failure counts register
+        /// Alert failure counts register
         (0x00a8 => pub(crate) alert_fail_counts: ReadWrite<u32, ALERT_FAIL_COUNTS::Register>),
-        // External health test alert failure counts register
+        /// External health test alert failure counts register
         (0x00ac => pub(crate) extht_fail_counts: ReadWrite<u32, EXTHT_FAIL_COUNTS::Register>),
-        // Firmware override control register
+        /// Firmware override control register
         (0x00b0 => pub(crate) fw_ov_control: ReadWrite<u32, FW_OV_CONTROL::Register>),
-        // Firmware override sha3 block start control register
+        /// Firmware override sha3 block start control register
         (0x00b4 => pub(crate) fw_ov_sha3_start: ReadWrite<u32, FW_OV_SHA3_START::Register>),
-        // Firmware override FIFO write full status register
+        /// Firmware override FIFO write full status register
         (0x00b8 => pub(crate) fw_ov_wr_fifo_full: ReadWrite<u32, FW_OV_WR_FIFO_FULL::Register>),
-        // Firmware override Observe FIFO overflow status
+        /// Firmware override observe FIFO overflow status
         (0x00bc => pub(crate) fw_ov_rd_fifo_overflow: ReadWrite<u32, FW_OV_RD_FIFO_OVERFLOW::Register>),
-        // Firmware override Observe FIFO read register
+        /// Firmware override observe FIFO read register
         (0x00c0 => pub(crate) fw_ov_rd_data: ReadWrite<u32, FW_OV_RD_DATA::Register>),
-        // Firmware override FIFO write register
+        /// Firmware override FIFO write register
         (0x00c4 => pub(crate) fw_ov_wr_data: ReadWrite<u32, FW_OV_WR_DATA::Register>),
-        // Observe FIFO threshold register
+        /// Observe FIFO threshold register
         (0x00c8 => pub(crate) observe_fifo_thresh: ReadWrite<u32, OBSERVE_FIFO_THRESH::Register>),
-        // Observe FIFO depth register
+        /// Observe FIFO depth register
         (0x00cc => pub(crate) observe_fifo_depth: ReadWrite<u32, OBSERVE_FIFO_DEPTH::Register>),
-        // Debug status register
+        /// Debug status register
         (0x00d0 => pub(crate) debug_status: ReadWrite<u32, DEBUG_STATUS::Register>),
-        // Recoverable alert status register
+        /// Recoverable alert status register
         (0x00d4 => pub(crate) recov_alert_sts: ReadWrite<u32, RECOV_ALERT_STS::Register>),
-        // Hardware detection of error conditions status register
+        /// Hardware detection of error conditions status register
         (0x00d8 => pub(crate) err_code: ReadWrite<u32, ERR_CODE::Register>),
-        // Test error conditions register
+        /// Test error conditions register
         (0x00dc => pub(crate) err_code_test: ReadWrite<u32, ERR_CODE_TEST::Register>),
-        // Main state machine state debug register
+        /// Main state machine state debug register
         (0x00e0 => pub(crate) main_sm_state: ReadWrite<u32, MAIN_SM_STATE::Register>),
         (0x00e4 => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         ES_ENTROPY_VALID OFFSET(0) NUMBITS(1) [],
         ES_HEALTH_TEST_FAILED OFFSET(1) NUMBITS(1) [],
