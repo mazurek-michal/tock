@@ -3,53 +3,55 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/otbn/data/otbn.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of alerts
+/// Number of alerts
 pub const OTBN_PARAM_NUM_ALERTS: u32 = 2;
-// Register width
+/// Register width
 pub const OTBN_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub OtbnRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Command Register
+        /// Command Register
         (0x0010 => pub(crate) cmd: ReadWrite<u32, CMD::Register>),
-        // Control Register
+        /// Control Register
         (0x0014 => pub(crate) ctrl: ReadWrite<u32, CTRL::Register>),
-        // Status Register
+        /// Status Register
         (0x0018 => pub(crate) status: ReadWrite<u32, STATUS::Register>),
-        // Operation Result Register
+        /// Operation Result Register
         (0x001c => pub(crate) err_bits: ReadWrite<u32, ERR_BITS::Register>),
-        // Fatal Alert Cause Register
+        /// Fatal Alert Cause Register
         (0x0020 => pub(crate) fatal_alert_cause: ReadWrite<u32, FATAL_ALERT_CAUSE::Register>),
-        // Instruction Count Register
+        /// Instruction Count Register
         (0x0024 => pub(crate) insn_cnt: ReadWrite<u32, INSN_CNT::Register>),
-        // A 32-bit CRC checksum of data written to memory
+        /// A 32-bit CRC checksum of data written to memory
         (0x0028 => pub(crate) load_checksum: ReadWrite<u32, LOAD_CHECKSUM::Register>),
-        // Memory area: Instruction Memory Access
+        (0x002c => _reserved1),
+        /// Memory area: Instruction Memory Access
         (0x4000 => pub(crate) imem: [ReadWrite<u32>; 1024]),
-        // Memory area: Data Memory Access
+        (0x5000 => _reserved2),
+        /// Memory area: Data Memory Access
         (0x8000 => pub(crate) dmem: [ReadWrite<u32>; 768]),
         (0x8c00 => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         DONE OFFSET(0) NUMBITS(1) [],
     ],

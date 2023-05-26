@@ -3,53 +3,53 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/uart/data/uart.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of alerts
+/// Number of alerts
 pub const UART_PARAM_NUM_ALERTS: u32 = 1;
-// Register width
+/// Register width
 pub const UART_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub UartRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // UART control register
+        /// UART control register
         (0x0010 => pub(crate) ctrl: ReadWrite<u32, CTRL::Register>),
-        // UART live status register
+        /// UART live status register
         (0x0014 => pub(crate) status: ReadWrite<u32, STATUS::Register>),
-        // UART read data
+        /// UART read data
         (0x0018 => pub(crate) rdata: ReadWrite<u32, RDATA::Register>),
-        // UART write data
+        /// UART write data
         (0x001c => pub(crate) wdata: ReadWrite<u32, WDATA::Register>),
-        // UART FIFO control register
+        /// UART FIFO control register
         (0x0020 => pub(crate) fifo_ctrl: ReadWrite<u32, FIFO_CTRL::Register>),
-        // UART FIFO status register
+        /// UART FIFO status register
         (0x0024 => pub(crate) fifo_status: ReadWrite<u32, FIFO_STATUS::Register>),
-        // TX pin override control. Gives direct SW control over TX pin state
+        /// TX pin override control. Gives direct SW control over TX pin state
         (0x0028 => pub(crate) ovrd: ReadWrite<u32, OVRD::Register>),
-        // UART oversampled values
+        /// UART oversampled values
         (0x002c => pub(crate) val: ReadWrite<u32, VAL::Register>),
-        // UART RX timeout control
+        /// UART RX timeout control
         (0x0030 => pub(crate) timeout_ctrl: ReadWrite<u32, TIMEOUT_CTRL::Register>),
         (0x0034 => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         TX_WATERMARK OFFSET(0) NUMBITS(1) [],
         RX_WATERMARK OFFSET(1) NUMBITS(1) [],
@@ -98,21 +98,27 @@ register_bitfields![u32,
         TXRST OFFSET(1) NUMBITS(1) [],
         RXILVL OFFSET(2) NUMBITS(3) [
             RXLVL1 = 0,
-            RXLVL4 = 1,
-            RXLVL8 = 2,
-            RXLVL16 = 3,
-            RXLVL30 = 4,
+            RXLVL2 = 1,
+            RXLVL4 = 2,
+            RXLVL8 = 3,
+            RXLVL16 = 4,
+            RXLVL32 = 5,
+            RXLVL64 = 6,
+            RXLVL126 = 7,
         ],
-        TXILVL OFFSET(5) NUMBITS(2) [
+        TXILVL OFFSET(5) NUMBITS(3) [
             TXLVL1 = 0,
-            TXLVL4 = 1,
-            TXLVL8 = 2,
-            TXLVL16 = 3,
+            TXLVL2 = 1,
+            TXLVL4 = 2,
+            TXLVL8 = 3,
+            TXLVL16 = 4,
+            TXLVL32 = 5,
+            TXLVL64 = 6,
         ],
     ],
     pub(crate) FIFO_STATUS [
-        TXLVL OFFSET(0) NUMBITS(6) [],
-        RXLVL OFFSET(16) NUMBITS(6) [],
+        TXLVL OFFSET(0) NUMBITS(8) [],
+        RXLVL OFFSET(16) NUMBITS(8) [],
     ],
     pub(crate) OVRD [
         TXEN OFFSET(0) NUMBITS(1) [],
