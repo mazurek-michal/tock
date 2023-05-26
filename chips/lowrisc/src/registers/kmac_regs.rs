@@ -3,73 +3,79 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/kmac/data/kmac.hjson
 use kernel::utilities::registers::ReadOnly;
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::WriteOnly;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of words for the secret key
+/// Number of words for the secret key
 pub const KMAC_PARAM_NUM_WORDS_KEY: u32 = 16;
-// Number of words for Encoded NsPrefix.
+/// Number of words for Encoded NsPrefix.
 pub const KMAC_PARAM_NUM_WORDS_PREFIX: u32 = 11;
-// Number of words for the LFSR seed used for entropy generation
+/// Number of entries in the message FIFO. Must match kmac_pkg::MsgFifoDepth.
+pub const KMAC_PARAM_NUM_ENTRIES_MSG_FIFO: u32 = 10;
+/// Number of bytes in a single entry of the message FIFO. Must match kmac_pkg::MsgWidth.
+pub const KMAC_PARAM_NUM_BYTES_MSG_FIFO_ENTRY: u32 = 8;
+/// Number of words for the LFSR seed used for entropy generation
 pub const KMAC_PARAM_NUM_SEEDS_ENTROPY_LFSR: u32 = 5;
-// Number of alerts
+/// Number of alerts
 pub const KMAC_PARAM_NUM_ALERTS: u32 = 2;
-// Register width
+/// Register width
 pub const KMAC_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub KmacRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Controls the configurability of !!CFG register.
+        /// Controls the configurability of !!CFG_SHADOWED register.
         (0x0010 => pub(crate) cfg_regwen: ReadWrite<u32, CFG_REGWEN::Register>),
-        // KMAC Configuration register.
+        /// KMAC Configuration register.
         (0x0014 => pub(crate) cfg_shadowed: ReadWrite<u32, CFG_SHADOWED::Register>),
-        // KMAC/ SHA3 command register.
+        /// KMAC/ SHA3 command register.
         (0x0018 => pub(crate) cmd: ReadWrite<u32, CMD::Register>),
-        // KMAC/SHA3 Status register.
+        /// KMAC/SHA3 Status register.
         (0x001c => pub(crate) status: ReadWrite<u32, STATUS::Register>),
-        // Entropy Timer Periods.
+        /// Entropy Timer Periods.
         (0x0020 => pub(crate) entropy_period: ReadWrite<u32, ENTROPY_PERIOD::Register>),
-        // Entropy Refresh Counter
+        /// Entropy Refresh Counter
         (0x0024 => pub(crate) entropy_refresh_hash_cnt: ReadWrite<u32, ENTROPY_REFRESH_HASH_CNT::Register>),
-        // Entropy Refresh Threshold
+        /// Entropy Refresh Threshold
         (0x0028 => pub(crate) entropy_refresh_threshold_shadowed: ReadWrite<u32, ENTROPY_REFRESH_THRESHOLD_SHADOWED::Register>),
-        // Entropy Seed
+        /// Entropy Seed
         (0x002c => pub(crate) entropy_seed: [ReadWrite<u32, ENTROPY_SEED::Register>; 5]),
-        // KMAC Secret Key
+        /// KMAC Secret Key
         (0x0040 => pub(crate) key_share0: [ReadWrite<u32, KEY_SHARE0::Register>; 16]),
-        // KMAC Secret Key, 2nd share.
+        /// KMAC Secret Key, 2nd share.
         (0x0080 => pub(crate) key_share1: [ReadWrite<u32, KEY_SHARE1::Register>; 16]),
-        // Secret Key length in bit.
+        /// Secret Key length in bit.
         (0x00c0 => pub(crate) key_len: ReadWrite<u32, KEY_LEN::Register>),
-        // cSHAKE Prefix register.
+        /// cSHAKE Prefix register.
         (0x00c4 => pub(crate) prefix: [ReadWrite<u32, PREFIX::Register>; 11]),
-        // KMAC/SHA3 Error Code
+        /// KMAC/SHA3 Error Code
         (0x00f0 => pub(crate) err_code: ReadWrite<u32, ERR_CODE::Register>),
-        // Memory area: Keccak State (1600 bit) memory.
+        (0x00f4 => _reserved1),
+        /// Memory area: Keccak State (1600 bit) memory.
         (0x0400 => pub(crate) state: [ReadOnly<u32>; 128]),
-        // Memory area: Message FIFO.
+        (0x0600 => _reserved2),
+        /// Memory area: Message FIFO.
         (0x0800 => pub(crate) msg_fifo: [WriteOnly<u32>; 512]),
         (0x1000 => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         KMAC_DONE OFFSET(0) NUMBITS(1) [],
         FIFO_EMPTY OFFSET(1) NUMBITS(1) [],

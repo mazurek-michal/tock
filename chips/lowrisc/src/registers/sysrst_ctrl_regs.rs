@@ -3,85 +3,89 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/sysrst_ctrl/data/sysrst_ctrl.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of keyboard combos
+/// Number of keyboard combos
 pub const SYSRST_CTRL_PARAM_NUM_COMBO: u32 = 4;
-// Number of timer bits
+/// Number of timer bits
 pub const SYSRST_CTRL_PARAM_TIMER_WIDTH: u32 = 16;
-// Number of detection timer bits
+/// Number of detection timer bits
 pub const SYSRST_CTRL_PARAM_DET_TIMER_WIDTH: u32 = 32;
-// Number of alerts
+/// Number of alerts
 pub const SYSRST_CTRL_PARAM_NUM_ALERTS: u32 = 1;
-// Register width
+/// Register width
 pub const SYSRST_CTRL_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub SysrstCtrlRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Configuration write enable control register
+        /// Configuration write enable control register
         (0x0010 => pub(crate) regwen: ReadWrite<u32, REGWEN::Register>),
-        // EC reset control register
+        /// EC reset control register
         (0x0014 => pub(crate) ec_rst_ctl: ReadWrite<u32, EC_RST_CTL::Register>),
-        // Ultra low power AC debounce control register
+        /// Ultra low power AC debounce control register
         (0x0018 => pub(crate) ulp_ac_debounce_ctl: ReadWrite<u32, ULP_AC_DEBOUNCE_CTL::Register>),
-        // Ultra low power lid debounce control register
+        /// Ultra low power lid debounce control register
         (0x001c => pub(crate) ulp_lid_debounce_ctl: ReadWrite<u32, ULP_LID_DEBOUNCE_CTL::Register>),
-        // Ultra low power pwrb debounce control register
+        /// Ultra low power pwrb debounce control register
         (0x0020 => pub(crate) ulp_pwrb_debounce_ctl: ReadWrite<u32, ULP_PWRB_DEBOUNCE_CTL::Register>),
-        // Ultra low power control register
+        /// Ultra low power control register
         (0x0024 => pub(crate) ulp_ctl: ReadWrite<u32, ULP_CTL::Register>),
-        // Ultra low power status
+        /// Ultra low power status
         (0x0028 => pub(crate) ulp_status: ReadWrite<u32, ULP_STATUS::Register>),
-        // wakeup status
+        /// wakeup status
         (0x002c => pub(crate) wkup_status: ReadWrite<u32, WKUP_STATUS::Register>),
-        // configure key input output invert property
+        /// configure key input output invert property
         (0x0030 => pub(crate) key_invert_ctl: ReadWrite<u32, KEY_INVERT_CTL::Register>),
-        // This register determines which override values are allowed for a given output.
+        /// This register determines which override values are allowed for a given output.
         (0x0034 => pub(crate) pin_allowed_ctl: ReadWrite<u32, PIN_ALLOWED_CTL::Register>),
-        // Enables the override function for a specific pin.
+        /// Enables the override function for a specific pin.
         (0x0038 => pub(crate) pin_out_ctl: ReadWrite<u32, PIN_OUT_CTL::Register>),
-        // Sets the pin override value. Note that only the values
+        /// Sets the pin override value. Note that only the values
         (0x003c => pub(crate) pin_out_value: ReadWrite<u32, PIN_OUT_VALUE::Register>),
-        // For SW to read the sysrst_ctrl inputs like GPIO
+        /// For SW to read the sysrst_ctrl inputs like GPIO
         (0x0040 => pub(crate) pin_in_value: ReadWrite<u32, PIN_IN_VALUE::Register>),
-        // Define the keys or inputs that can trigger the interrupt
+        /// Define the keys or inputs that can trigger the interrupt
         (0x0044 => pub(crate) key_intr_ctl: ReadWrite<u32, KEY_INTR_CTL::Register>),
-        // Debounce timer control register for key-triggered interrupt
+        /// Debounce timer control register for key-triggered interrupt
         (0x0048 => pub(crate) key_intr_debounce_ctl: ReadWrite<u32, KEY_INTR_DEBOUNCE_CTL::Register>),
-        // Debounce timer control register for pwrb_in H2L transition
+        /// Debounce timer control register for pwrb_in H2L transition
         (0x004c => pub(crate) auto_block_debounce_ctl: ReadWrite<u32, AUTO_BLOCK_DEBOUNCE_CTL::Register>),
-        // confiure the key outputs to auto-override and their value
+        /// configure the key outputs to auto-override and their value
         (0x0050 => pub(crate) auto_block_out_ctl: ReadWrite<u32, AUTO_BLOCK_OUT_CTL::Register>),
-        // To define the keys that trigger the combo
-        (0x0054 => pub(crate) com_sel_ctl: [ReadWrite<u32, COM_SEL_CTL::Register>; 4]),
-        // To define the duration that the combo should be pressed
-        (0x0064 => pub(crate) com_det_ctl: [ReadWrite<u32, COM_DET_CTL::Register>; 4]),
-        // To define the actions once the combo is detected
-        (0x0074 => pub(crate) com_out_ctl: [ReadWrite<u32, COM_OUT_CTL::Register>; 4]),
-        // Combo interrupt source. These registers will only be set if the
-        (0x0084 => pub(crate) combo_intr_status: ReadWrite<u32, COMBO_INTR_STATUS::Register>),
-        // key interrupt source
-        (0x0088 => pub(crate) key_intr_status: ReadWrite<u32, KEY_INTR_STATUS::Register>),
-        (0x008c => @END),
+        /// To define the keys that define the pre-condition of the combo
+        (0x0054 => pub(crate) com_pre_sel_ctl: [ReadWrite<u32, COM_PRE_SEL_CTL::Register>; 4]),
+        /// To define the duration that the combo pre-condition should be pressed
+        (0x0064 => pub(crate) com_pre_det_ctl: [ReadWrite<u32, COM_PRE_DET_CTL::Register>; 4]),
+        /// To define the keys that trigger the combo
+        (0x0074 => pub(crate) com_sel_ctl: [ReadWrite<u32, COM_SEL_CTL::Register>; 4]),
+        /// To define the duration that the combo should be pressed
+        (0x0084 => pub(crate) com_det_ctl: [ReadWrite<u32, COM_DET_CTL::Register>; 4]),
+        /// To define the actions once the combo is detected
+        (0x0094 => pub(crate) com_out_ctl: [ReadWrite<u32, COM_OUT_CTL::Register>; 4]),
+        /// Combo interrupt source. These registers will only be set if the
+        (0x00a4 => pub(crate) combo_intr_status: ReadWrite<u32, COMBO_INTR_STATUS::Register>),
+        /// key interrupt source
+        (0x00a8 => pub(crate) key_intr_status: ReadWrite<u32, KEY_INTR_STATUS::Register>),
+        (0x00ac => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         EVENT_DETECTED OFFSET(0) NUMBITS(1) [],
     ],
@@ -182,13 +186,13 @@ register_bitfields![u32,
         AC_PRESENT_H2L OFFSET(4) NUMBITS(1) [],
         EC_RST_L_H2L OFFSET(5) NUMBITS(1) [],
         FLASH_WP_L_H2L OFFSET(6) NUMBITS(1) [],
-        PWRB_IN_L2H OFFSET(8) NUMBITS(1) [],
-        KEY0_IN_L2H OFFSET(9) NUMBITS(1) [],
-        KEY1_IN_L2H OFFSET(10) NUMBITS(1) [],
-        KEY2_IN_L2H OFFSET(11) NUMBITS(1) [],
-        AC_PRESENT_L2H OFFSET(12) NUMBITS(1) [],
-        EC_RST_L_L2H OFFSET(13) NUMBITS(1) [],
-        FLASH_WP_L_L2H OFFSET(14) NUMBITS(1) [],
+        PWRB_IN_L2H OFFSET(7) NUMBITS(1) [],
+        KEY0_IN_L2H OFFSET(8) NUMBITS(1) [],
+        KEY1_IN_L2H OFFSET(9) NUMBITS(1) [],
+        KEY2_IN_L2H OFFSET(10) NUMBITS(1) [],
+        AC_PRESENT_L2H OFFSET(11) NUMBITS(1) [],
+        EC_RST_L_L2H OFFSET(12) NUMBITS(1) [],
+        FLASH_WP_L_L2H OFFSET(13) NUMBITS(1) [],
     ],
     pub(crate) KEY_INTR_DEBOUNCE_CTL [
         DEBOUNCE_TIMER OFFSET(0) NUMBITS(16) [],
@@ -204,6 +208,16 @@ register_bitfields![u32,
         KEY0_OUT_VALUE OFFSET(4) NUMBITS(1) [],
         KEY1_OUT_VALUE OFFSET(5) NUMBITS(1) [],
         KEY2_OUT_VALUE OFFSET(6) NUMBITS(1) [],
+    ],
+    pub(crate) COM_PRE_SEL_CTL [
+        KEY0_IN_SEL_0 OFFSET(0) NUMBITS(1) [],
+        KEY1_IN_SEL_0 OFFSET(1) NUMBITS(1) [],
+        KEY2_IN_SEL_0 OFFSET(2) NUMBITS(1) [],
+        PWRB_IN_SEL_0 OFFSET(3) NUMBITS(1) [],
+        AC_PRESENT_SEL_0 OFFSET(4) NUMBITS(1) [],
+    ],
+    pub(crate) COM_PRE_DET_CTL [
+        PRECONDITION_TIMER_0 OFFSET(0) NUMBITS(32) [],
     ],
     pub(crate) COM_SEL_CTL [
         KEY0_IN_SEL_0 OFFSET(0) NUMBITS(1) [],

@@ -3,63 +3,63 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/adc_ctrl/data/adc_ctrl.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number for ADC filters
+/// Number for ADC filters
 pub const ADC_CTRL_PARAM_NUM_ADC_FILTER: u32 = 8;
-// Number for ADC channels
+/// Number for ADC channels
 pub const ADC_CTRL_PARAM_NUM_ADC_CHANNEL: u32 = 2;
-// Number of alerts
+/// Number of alerts
 pub const ADC_CTRL_PARAM_NUM_ALERTS: u32 = 1;
-// Register width
+/// Register width
 pub const ADC_CTRL_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub AdcCtrlRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // ADC enable control register
+        /// ADC enable control register
         (0x0010 => pub(crate) adc_en_ctl: ReadWrite<u32, ADC_EN_CTL::Register>),
-        // ADC PowerDown(PD) control register
+        /// ADC PowerDown(PD) control register
         (0x0014 => pub(crate) adc_pd_ctl: ReadWrite<u32, ADC_PD_CTL::Register>),
-        // ADC Low-Power(LP) sample control register
+        /// ADC Low-Power(LP) sample control register
         (0x0018 => pub(crate) adc_lp_sample_ctl: ReadWrite<u32, ADC_LP_SAMPLE_CTL::Register>),
-        // ADC sample control register
+        /// ADC sample control register
         (0x001c => pub(crate) adc_sample_ctl: ReadWrite<u32, ADC_SAMPLE_CTL::Register>),
-        // ADC FSM reset control
+        /// ADC FSM reset control
         (0x0020 => pub(crate) adc_fsm_rst: ReadWrite<u32, ADC_FSM_RST::Register>),
-        // ADC channel0 filter range
+        /// ADC channel0 filter range
         (0x0024 => pub(crate) adc_chn0_filter_ctl: [ReadWrite<u32, ADC_CHN0_FILTER_CTL::Register>; 8]),
-        // ADC channel1 filter range
+        /// ADC channel1 filter range
         (0x0044 => pub(crate) adc_chn1_filter_ctl: [ReadWrite<u32, ADC_CHN1_FILTER_CTL::Register>; 8]),
-        // ADC value sampled on channel
+        /// ADC value sampled on channel
         (0x0064 => pub(crate) adc_chn_val: [ReadWrite<u32, ADC_CHN_VAL::Register>; 2]),
-        // Enable filter matches as wakeups
+        /// Enable filter matches as wakeups
         (0x006c => pub(crate) adc_wakeup_ctl: ReadWrite<u32, ADC_WAKEUP_CTL::Register>),
-        // Adc filter match status
+        /// Adc filter match status
         (0x0070 => pub(crate) filter_status: ReadWrite<u32, FILTER_STATUS::Register>),
-        // Interrupt enable controls.
+        /// Interrupt enable controls.
         (0x0074 => pub(crate) adc_intr_ctl: ReadWrite<u32, ADC_INTR_CTL::Register>),
-        // Debug cable internal status
+        /// Debug cable internal status
         (0x0078 => pub(crate) adc_intr_status: ReadWrite<u32, ADC_INTR_STATUS::Register>),
         (0x007c => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         MATCH_DONE OFFSET(0) NUMBITS(1) [],
     ],

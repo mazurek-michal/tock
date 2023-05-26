@@ -3,49 +3,49 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/pattgen/data/pattgen.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of data registers per each channel
+/// Number of data registers per each channel
 pub const PATTGEN_PARAM_NUM_REGS_DATA: u32 = 2;
-// Number of alerts
+/// Number of alerts
 pub const PATTGEN_PARAM_NUM_ALERTS: u32 = 1;
-// Register width
+/// Register width
 pub const PATTGEN_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub PattgenRegisters {
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0000 => pub(crate) intr_state: ReadWrite<u32, INTR::Register>),
-        // Interrupt Enable Register
+        /// Interrupt Enable Register
         (0x0004 => pub(crate) intr_enable: ReadWrite<u32, INTR::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0008 => pub(crate) intr_test: ReadWrite<u32, INTR::Register>),
-        // Alert Test Register
+        /// Alert Test Register
         (0x000c => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // PATTGEN control register
+        /// PATTGEN control register
         (0x0010 => pub(crate) ctrl: ReadWrite<u32, CTRL::Register>),
-        // PATTGEN pre-divider register for Channel 0
+        /// PATTGEN pre-divider register for Channel 0
         (0x0014 => pub(crate) prediv_ch0: ReadWrite<u32, PREDIV_CH0::Register>),
-        // PATTGEN pre-divider register for Channel 1
+        /// PATTGEN pre-divider register for Channel 1
         (0x0018 => pub(crate) prediv_ch1: ReadWrite<u32, PREDIV_CH1::Register>),
-        // PATTGEN seed pattern multi-registers for Channel 0.
+        /// PATTGEN seed pattern multi-registers for Channel 0.
         (0x001c => pub(crate) data_ch0: [ReadWrite<u32, DATA_CH0::Register>; 2]),
-        // PATTGEN seed pattern multi-registers for Channel 1.
+        /// PATTGEN seed pattern multi-registers for Channel 1.
         (0x0024 => pub(crate) data_ch1: [ReadWrite<u32, DATA_CH1::Register>; 2]),
-        // PATTGEN pattern length
+        /// PATTGEN pattern length
         (0x002c => pub(crate) size: ReadWrite<u32, SIZE::Register>),
         (0x0030 => @END),
     }
 }
 
 register_bitfields![u32,
-    // Common Interrupt Offsets
+    /// Common Interrupt Offsets
     pub(crate) INTR [
         DONE_CH0 OFFSET(0) NUMBITS(1) [],
         DONE_CH1 OFFSET(1) NUMBITS(1) [],

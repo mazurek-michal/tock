@@ -3,44 +3,44 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-8164-g7a7139c8a
-// https://github.com/lowRISC/opentitan/tree/7a7139c8af345f423ac27a0186febdda027f7127
+// Built for earlgrey_silver_release_v5-11270-gcd74b4221
+// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
 // Tree status: clean
-// Build date: 2022-10-25T11:35:38
+// Build date: 2023-05-26T10:18:40
 
 // Original reference file: hw/ip/aon_timer/data/aon_timer.hjson
 use kernel::utilities::registers::ReadWrite;
 use kernel::utilities::registers::{register_bitfields, register_structs};
-// Number of alerts
+/// Number of alerts
 pub const AON_TIMER_PARAM_NUM_ALERTS: u32 = 1;
-// Register width
+/// Register width
 pub const AON_TIMER_PARAM_REG_WIDTH: u32 = 32;
 
 register_structs! {
     pub AonTimerRegisters {
-        // Alert Test Register
+        /// Alert Test Register
         (0x0000 => pub(crate) alert_test: ReadWrite<u32, ALERT_TEST::Register>),
-        // Wakeup Timer Control register
+        /// Wakeup Timer Control register
         (0x0004 => pub(crate) wkup_ctrl: ReadWrite<u32, WKUP_CTRL::Register>),
-        // Wakeup Timer Threshold Register
+        /// Wakeup Timer Threshold Register
         (0x0008 => pub(crate) wkup_thold: ReadWrite<u32, WKUP_THOLD::Register>),
-        // Wakeup Timer Count Register
+        /// Wakeup Timer Count Register
         (0x000c => pub(crate) wkup_count: ReadWrite<u32, WKUP_COUNT::Register>),
-        // Watchdog Timer Write Enable Register
+        /// Watchdog Timer Write Enable Register
         (0x0010 => pub(crate) wdog_regwen: ReadWrite<u32, WDOG_REGWEN::Register>),
-        // Watchdog Timer Control register
+        /// Watchdog Timer Control register
         (0x0014 => pub(crate) wdog_ctrl: ReadWrite<u32, WDOG_CTRL::Register>),
-        // Watchdog Timer Bark Threshold Register
+        /// Watchdog Timer Bark Threshold Register
         (0x0018 => pub(crate) wdog_bark_thold: ReadWrite<u32, WDOG_BARK_THOLD::Register>),
-        // Watchdog Timer Bite Threshold Register
+        /// Watchdog Timer Bite Threshold Register
         (0x001c => pub(crate) wdog_bite_thold: ReadWrite<u32, WDOG_BITE_THOLD::Register>),
-        // Watchdog Timer Count Register
+        /// Watchdog Timer Count Register
         (0x0020 => pub(crate) wdog_count: ReadWrite<u32, WDOG_COUNT::Register>),
-        // Interrupt State Register
+        /// Interrupt State Register
         (0x0024 => pub(crate) intr_state: ReadWrite<u32, INTR_STATE::Register>),
-        // Interrupt Test Register
+        /// Interrupt Test Register
         (0x0028 => pub(crate) intr_test: ReadWrite<u32, INTR_TEST::Register>),
-        // Wakeup request status
+        /// Wakeup request status
         (0x002c => pub(crate) wkup_cause: ReadWrite<u32, WKUP_CAUSE::Register>),
         (0x0030 => @END),
     }
