@@ -4,6 +4,7 @@
 
 use kernel::utilities::StaticRef;
 use lowrisc::pwrmgr::PwrMgrRegisters;
+use crate::top_earlgrey::TOP_EARLGREY_PWRMGR_AON_BASE_ADDR;
 
 pub(crate) const PWRMGR_BASE: StaticRef<PwrMgrRegisters> =
-    unsafe { StaticRef::new(0x4040_0000 as *const PwrMgrRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_PWRMGR_AON_BASE_ADDR as *const PwrMgrRegisters) };
