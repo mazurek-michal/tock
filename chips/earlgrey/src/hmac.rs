@@ -4,6 +4,7 @@
 
 use kernel::utilities::StaticRef;
 use lowrisc::hmac::HmacRegisters;
+use crate::top_earlgrey::TOP_EARLGREY_HMAC_BASE_ADDR;
 
 pub const HMAC0_BASE: StaticRef<HmacRegisters> =
-    unsafe { StaticRef::new(0x4111_0000 as *const HmacRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_HMAC_BASE_ADDR as *const HmacRegisters) };

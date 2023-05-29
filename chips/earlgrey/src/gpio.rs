@@ -11,12 +11,13 @@ pub use lowrisc::gpio::GpioPin;
 pub use lowrisc::gpio::Pin;
 use lowrisc::registers::gpio_regs::GpioRegisters;
 use lowrisc::registers::pinmux_regs::PinmuxRegisters;
+use crate::top_earlgrey::{TOP_EARLGREY_GPIO_BASE_ADDR, TOP_EARLGREY_PINMUX_AON_BASE_ADDR};
 
 pub const PADCTRL_BASE: StaticRef<PinmuxRegisters> =
-    unsafe { StaticRef::new(0x4047_0000 as *const PinmuxRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_PINMUX_AON_BASE_ADDR as *const PinmuxRegisters) };
 
 pub const GPIO0_BASE: StaticRef<GpioRegisters> =
-    unsafe { StaticRef::new(0x4004_0000 as *const GpioRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_GPIO_BASE_ADDR as *const GpioRegisters) };
 
 pub struct Port<'a> {
     pins: [GpioPin<'a>; 32],

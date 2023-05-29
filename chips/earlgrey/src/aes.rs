@@ -18,6 +18,7 @@ use kernel::utilities::registers::{
 };
 use kernel::utilities::StaticRef;
 use kernel::ErrorCode;
+use crate::top_earlgrey::TOP_EARLGREY_AES_BASE_ADDR;
 
 const MAX_LENGTH: usize = 128;
 
@@ -114,7 +115,7 @@ enum Mode {
 
 // https://docs.opentitan.org/hw/top_earlgrey/doc/
 const AES_BASE: StaticRef<AesRegisters> =
-    unsafe { StaticRef::new(0x4110_0000 as *const AesRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_AES_BASE_ADDR as *const AesRegisters) };
 
 pub struct Aes<'a> {
     registers: StaticRef<AesRegisters>,

@@ -4,6 +4,8 @@
 
 use kernel::utilities::StaticRef;
 use lowrisc::otbn::OtbnRegisters;
+use crate::top_earlgrey::TOP_EARLGREY_OTBN_BASE_ADDR;
 
 pub const OTBN_BASE: StaticRef<OtbnRegisters> =
-    unsafe { StaticRef::new(0x4113_0000 as *const OtbnRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_OTBN_BASE_ADDR as *const OtbnRegisters) };
+
