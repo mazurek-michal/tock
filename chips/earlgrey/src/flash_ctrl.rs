@@ -4,6 +4,7 @@
 
 use kernel::utilities::StaticRef;
 use lowrisc::flash_ctrl::FlashCtrlRegisters;
+use crate::top::top_earlgrey::TOP_EARLGREY_FLASH_CTRL_CORE_BASE_ADDR;
 
 pub const FLASH_CTRL_BASE: StaticRef<FlashCtrlRegisters> =
-    unsafe { StaticRef::new(0x4100_0000 as *const FlashCtrlRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_FLASH_CTRL_CORE_BASE_ADDR as *const FlashCtrlRegisters) };

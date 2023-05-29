@@ -4,6 +4,7 @@
 
 use kernel::utilities::StaticRef;
 use lowrisc::csrng::CsRngRegisters;
+use crate::top::top_earlgrey::TOP_EARLGREY_CSRNG_BASE_ADDR;
 
 pub const CSRNG_BASE: StaticRef<CsRngRegisters> =
-    unsafe { StaticRef::new(0x4115_0000 as *const CsRngRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_CSRNG_BASE_ADDR as *const CsRngRegisters) };

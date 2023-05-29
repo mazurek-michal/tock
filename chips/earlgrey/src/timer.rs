@@ -12,6 +12,7 @@ use kernel::utilities::registers::{register_bitfields, register_structs, ReadWri
 use kernel::utilities::StaticRef;
 use kernel::ErrorCode;
 use rv32i::machine_timer::MachineTimer;
+use crate::top::top_earlgrey::TOP_EARLGREY_RV_TIMER_BASE_ADDR;
 
 const PRESCALE: u16 = ((CONFIG.cpu_freq / 10_000) - 1) as u16; // 10Khz
 
@@ -161,4 +162,4 @@ impl<'a> time::Alarm<'a> for RvTimer<'a> {
 }
 
 const TIMER_BASE: StaticRef<TimerRegisters> =
-    unsafe { StaticRef::new(0x4010_0000 as *const TimerRegisters) };
+    unsafe { StaticRef::new(TOP_EARLGREY_RV_TIMER_BASE_ADDR as *const TimerRegisters) };
