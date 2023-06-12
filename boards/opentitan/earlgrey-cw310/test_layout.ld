@@ -35,6 +35,7 @@ SECTIONS {
         . += 384; /* modulus */
         . += 4;   /* address_translation */
         . += 4;   /* identifier */
+        . += 4;   /* manifest_version */
         . += 4;   /* length */
         . += 4;   /* version_major */
         . += 4;   /* version_minor */
@@ -45,8 +46,11 @@ SECTIONS {
         . += 4;   /* code_start */
         . += 4;   /* code_end */
         LONG(_stext - ORIGIN(rom)); /* . = . + 4; entry_point */
-        . += 176; /* padding */
-        /* size = 8960 bytes */
+        /* manifest extension table */
+        /* see: sw/device/silicon_creator/lib/base/chip.h */
+        /* CHIP_MANIFEST_EXT_TABLE_COUNT = 16 */
+        /* sizeof(manifest_ext_table_entry) = 8 */
+        . += 128; /* manifest_ext_table */
     } > rom
 
     .vectors : ALIGN (256) {
