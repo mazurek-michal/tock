@@ -3,10 +3,10 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-11270-gcd74b4221
-// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
+// Built for Earlgrey-M2.5.1-RC1-294-g8522e05bc
+// https://github.com/lowRISC/opentitan/tree/8522e05bc4e5e5e6fec08e8066957fd39559838f
 // Tree status: clean
-// Build date: 2023-05-26T10:18:40
+// Build date: 2023-06-29T11:51:48
 
 // Original reference file: hw/ip/otp_ctrl/data/otp_ctrl.hjson
 use kernel::utilities::registers::ReadOnly;
@@ -171,6 +171,10 @@ pub const OTP_CTRL_PARAM_CREATOR_SW_CFG_RNG_ALERT_THRESHOLD_SIZE: u32 = 4;
 pub const OTP_CTRL_PARAM_CREATOR_SW_CFG_RNG_HEALTH_CONFIG_DIGEST_OFFSET: usize = 348;
 /// Size of CREATOR_SW_CFG_RNG_HEALTH_CONFIG_DIGEST
 pub const OTP_CTRL_PARAM_CREATOR_SW_CFG_RNG_HEALTH_CONFIG_DIGEST_SIZE: u32 = 4;
+/// Offset of CREATOR_SW_CFG_SRAM_KEY_RENEW_EN
+pub const OTP_CTRL_PARAM_CREATOR_SW_CFG_SRAM_KEY_RENEW_EN_OFFSET: usize = 352;
+/// Size of CREATOR_SW_CFG_SRAM_KEY_RENEW_EN
+pub const OTP_CTRL_PARAM_CREATOR_SW_CFG_SRAM_KEY_RENEW_EN_SIZE: u32 = 4;
 /// Offset of CREATOR_SW_CFG_DIGEST
 pub const OTP_CTRL_PARAM_CREATOR_SW_CFG_DIGEST_OFFSET: usize = 856;
 /// Size of CREATOR_SW_CFG_DIGEST
@@ -243,6 +247,10 @@ pub const OTP_CTRL_PARAM_OWNER_SW_CFG_ROM_KEYMGR_ROM_EXT_MEAS_EN_SIZE: u32 = 4;
 pub const OTP_CTRL_PARAM_OWNER_SW_CFG_MANUF_STATE_OFFSET: usize = 1384;
 /// Size of OWNER_SW_CFG_MANUF_STATE
 pub const OTP_CTRL_PARAM_OWNER_SW_CFG_MANUF_STATE_SIZE: u32 = 4;
+/// Offset of OWNER_SW_CFG_ROM_RSTMGR_INFO_EN
+pub const OTP_CTRL_PARAM_OWNER_SW_CFG_ROM_RSTMGR_INFO_EN_OFFSET: usize = 1388;
+/// Size of OWNER_SW_CFG_ROM_RSTMGR_INFO_EN
+pub const OTP_CTRL_PARAM_OWNER_SW_CFG_ROM_RSTMGR_INFO_EN_SIZE: u32 = 4;
 /// Offset of OWNER_SW_CFG_DIGEST
 pub const OTP_CTRL_PARAM_OWNER_SW_CFG_DIGEST_OFFSET: usize = 1656;
 /// Size of OWNER_SW_CFG_DIGEST

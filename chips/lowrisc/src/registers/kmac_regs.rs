@@ -3,10 +3,10 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-11270-gcd74b4221
-// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
+// Built for Earlgrey-M2.5.1-RC1-294-g8522e05bc
+// https://github.com/lowRISC/opentitan/tree/8522e05bc4e5e5e6fec08e8066957fd39559838f
 // Tree status: clean
-// Build date: 2023-05-26T10:18:40
+// Build date: 2023-06-29T11:51:48
 
 // Original reference file: hw/ip/kmac/data/kmac.hjson
 use kernel::utilities::registers::ReadOnly;
