@@ -3,10 +3,10 @@
 //   Apache License, Version 2.0 (LICENSE-APACHE <http://www.apache.org/licenses/LICENSE-2.0>)
 //   MIT License (LICENSE-MIT <http://opensource.org/licenses/MIT>)
 
-// Built for earlgrey_silver_release_v5-11270-gcd74b4221
-// https://github.com/lowRISC/opentitan/tree/cd74b42214fb37ba6b2d5bd4fa13ff0273f77e4e
+// Built for Earlgrey-M2.5.1-RC1-389-g21ce4e9761
+// https://github.com/lowRISC/opentitan/tree/21ce4e9761abdf5c919b46e5ae64a5a8e24992f7
 // Tree status: clean
-// Build date: 2023-05-26T10:18:40
+// Build date: 2023-07-20T09:13:24
 
 // Original reference file: hw/ip/rom_ctrl/data/rom_ctrl.hjson
 use kernel::utilities::registers::ReadOnly;
