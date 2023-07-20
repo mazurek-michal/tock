@@ -2,10 +2,10 @@
 // Licensed under the Apache License, Version 2.0, see LICENSE for details.
 // SPDX-License-Identifier: Apache-2.0
 
-// Built for earlgrey_silver_release_v5-11437-gb228e6a8c
-// https://github.com/lowRISC/opentitan/tree/b228e6a8c6f28861bcfcdb2252e9b60407245d06
+// Built for Earlgrey-M2.5.1-RC1-389-g21ce4e9761
+// https://github.com/lowRISC/opentitan/tree/21ce4e9761abdf5c919b46e5ae64a5a8e24992f7
 // Tree status: clean
-// Build date: 2023-06-05T16:22:07.882281
+// Build date: 2023-07-20T09:36:12.725946
 
 // This file was generated automatically.
 // Please do not modify content of this file directly.
