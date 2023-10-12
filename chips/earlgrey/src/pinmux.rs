@@ -52,7 +52,7 @@ pub enum Pad {
 }
 
 impl Pad {
-    // Extract value of attributes using common layout
+    /// Extract value of attributes using common layout
     fn pad_attr(&self) -> PadAttribute {
         PadAttribute::new(match *self {
             Self::Mio(mio) => PINMUX_BASE.mio_pad_attr[mio as usize].get(),
@@ -60,7 +60,7 @@ impl Pad {
         })
     }
 
-    // Modify value of pad attribute using common MIO/DIO register layout
+    /// Modify value of pad attribute using common MIO/DIO register layout
     fn modify_pad_attr(&self, flags: FieldValue<u32, PAD_ATTR::Register>) {
         let mut attr = self.pad_attr();
         attr.modify(flags);
@@ -121,20 +121,20 @@ impl Pad {
 // https://opentitan.org/book/hw/ip/pinmux/doc/programmers_guide.html#pinmux-configuration
 
 trait SelectOutput {
-    // Connect particular pad to internal peripheral
+    /// Connect particular pad to internal peripheral
     fn connect_output(self, output: PinmuxOutsel);
 
-    // Connect particular pad output to always low
+    /// Connect particular pad output to always low
     fn connect_low(self);
 
-    // Connect particular pad output to always high
+    /// Connect particular pad output to always high
     fn connect_high(self);
 
-    // This function disconnect pad from peripheral
-    // and set it to High-Impedance state
+    /// This function disconnect pad from peripheral
+    /// and set it to High-Impedance state
     fn connect_high_z(self);
 
-    // Lock selection of output for particular pad
+    /// Lock selection of output for particular pad
     fn lock(self);
 }
 
@@ -161,16 +161,16 @@ impl SelectOutput for MuxedPads {
 }
 
 trait SelectInput {
-    // Connect internal peripheral input to particular pad
+    /// Connect internal peripheral input to particular pad
     fn connect_input(self, input: PinmuxInsel);
 
-    // Connect internal peripherals input to always low
+    /// Connect internal peripherals input to always low
     fn connect_low(self);
 
-    // Connect internal peripherals input to always high
+    /// Connect internal peripherals input to always high
     fn connect_high(self);
 
-    // Lock input configurations
+    /// Lock input configurations
     fn lock(self);
 }
 
